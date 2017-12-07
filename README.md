@@ -16,3 +16,11 @@ mvn -Dmaven.test.skip=true -Dcheckstyle.skip=true clean package install assembly
 TransactionProducer 事务发送者
 TransactionConsumer 事务消费者
 
+
+
+
+
+修改点：
+
+org.apache.rocketmq.store.transaction
+org.apache.rocketmq.store.CommitLog.isMappedFileMatchedRecover(MappedFile)
