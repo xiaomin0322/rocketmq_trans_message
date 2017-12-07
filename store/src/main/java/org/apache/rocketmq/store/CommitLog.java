@@ -537,7 +537,7 @@ public class CommitLog {
             if (transactionOffset <= mappedFile.getFileFromOffset()) {
                 log.info("isMappedFileMatchedRecover transactionOffset :mappedFile {} : {}", mappedFile.getFileName(), transactionOffset);
                 return false;
-            }
+            } 
         }
 
         if (this.defaultMessageStore.getMessageStoreConfig().isMessageIndexEnable()//
