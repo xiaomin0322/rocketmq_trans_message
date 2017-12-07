@@ -19,6 +19,12 @@ package org.apache.rocketmq.store.transaction;
 
 import java.util.List;
 
+
+/**
+ * 数据库存储接口类
+ * @author root
+ *
+ */
 public interface TransactionStore {
 
     boolean load();

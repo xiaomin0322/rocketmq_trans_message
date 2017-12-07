@@ -19,10 +19,20 @@ import java.util.concurrent.atomic.AtomicLong;
  * @Description:
  * @date 2017/11/6 上午11:15
  */
+
+
+/**
+ * 本地事物offset维护
+ * @author root
+ *
+ */
 public class TransactionOffsetConifgService extends ConfigManager {
 
     private static final Logger log = LoggerFactory.getLogger(LoggerName.STORE_LOGGER_NAME);
 
+    /**
+     * 事物offset
+     */
     private final AtomicLong transactionOffset = new AtomicLong(0L);
 
     private final DefaultMessageStore defaultMessageStore;
@@ -61,7 +71,9 @@ public class TransactionOffsetConifgService extends ConfigManager {
     public String encode(boolean prettyFormat) {
         return String.valueOf(transactionOffset);
     }
-
+    /**
+     * 定时将内存中的事物offset向文件里面刷
+     */
     public void start() {
         this.timer.scheduleAtFixedRate(new TimerTask() {
             @Override

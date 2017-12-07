@@ -33,6 +33,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * 事物消息数据库具体操作类
+ * @author root
+ *
+ */
 public class JDBCTransactionStore implements TransactionStore {
     private static final Logger log = LoggerFactory.getLogger(LoggerName.TRANSACTION_LOGGER_NAME);
     private final MessageStoreConfig messageStoreConfig;

@@ -16,6 +16,12 @@ import java.util.UUID;
  * @Description:
  * @date 2017/11/19 上午11:50
  */
+
+/**
+ * 事物 TransactionTableDefConfigService
+ * @author root
+ *
+ */
 public class TransactionTableDefConfigService extends ConfigManager {
 
     private DefaultMessageStore defaultMessageStore;

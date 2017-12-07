@@ -129,6 +129,9 @@ public class TransactionStateDBService implements TransactionStateService {
         return transactionRecordFlush2DBService.queryTransactionOffset();
     }
 
+    /**
+     * 定时扫描数据库的事物状态记录进行回调生产者
+     */
     private void addTimerTask() {
         this.timer.scheduleAtFixedRate(new TimerTask() {
             private final TransactionCheckExecuter transactionCheckExecuter = TransactionStateDBService.this.defaultMessageStore.getTransactionCheckExecuter();

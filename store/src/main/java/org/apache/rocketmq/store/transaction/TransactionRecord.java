@@ -17,6 +17,11 @@
 
 package org.apache.rocketmq.store.transaction;
 
+/**
+ * 数据库存储bean
+ * @author root
+ *
+ */
 public class TransactionRecord {
 
     public TransactionRecord(long offset, long timestamp, int size, String producerGroup) {
