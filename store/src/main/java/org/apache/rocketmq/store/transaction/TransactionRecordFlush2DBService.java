@@ -211,7 +211,7 @@ public class TransactionRecordFlush2DBService extends ServiceThread {
         if (requests == null) {
             return;
         }
-        //如果不停机 TODO  未知
+        //如果不停机 TODO 消费一个消息，补充一个消息
         if (!shutdown) {
             putEmptyRequestList();
         }
@@ -254,7 +254,7 @@ public class TransactionRecordFlush2DBService extends ServiceThread {
                                 if (request.getPreparedTransactionOffset() == 0L) {
                                     break;
                                 }
-                            //TODO  未知    
+                            //TODO  走下面的逻辑 
                             case MessageSysFlag.TRANSACTION_COMMIT_TYPE:
                             //如果是回滚消息	
                             case MessageSysFlag.TRANSACTION_ROLLBACK_TYPE:
