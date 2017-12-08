@@ -1293,7 +1293,10 @@ public class DefaultMessageStore implements MessageStore {
             case MessageSysFlag.TRANSACTION_ROLLBACK_TYPE:
                 break;
         }
+        //记录事务状态
         this.handingTransactionState(req);
+        
+        
         if (DefaultMessageStore.this.getMessageStoreConfig().isMessageIndexEnable()) {
             DefaultMessageStore.this.indexService.buildIndex(req);
         }
