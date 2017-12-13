@@ -130,7 +130,7 @@ public class TransactionStateDBService implements TransactionStateService {
     }
 
     /**
-     * 定时扫描数据库的事物状态记录进行回调生产者
+     * 定时扫描数据库的事物状态记录进行回调生产者，默认30秒回调一次，具体看配置
      */
     private void addTimerTask() {
         this.timer.scheduleAtFixedRate(new TimerTask() {
@@ -149,16 +149,20 @@ public class TransactionStateDBService implements TransactionStateService {
                     return;
                 }
 
+                //查询总条数
                 long totalRecords = transactionRecordFlush2DBService.getTransactionStore().totalRecords();
                 long pk = 0;
                 List<TransactionRecord> records = new ArrayList<TransactionRecord>();
+                //总条数大于0 每次获取100条
                 while (totalRecords > 0 && (records = transactionRecordFlush2DBService.getTransactionStore().traverse(pk, 100)).size() > 0) {
                     for (TransactionRecord record : records) {
                         try {
+                        	//
                             long timestampLong = record.getTimestamp();
                             if (System.currentTimeMillis() - timestampLong <= 0) {
                                 continue;
                             }
+                            //开始回调生产者
                             this.transactionCheckExecuter.gotoCheck(record.getProducerGroup().hashCode(), 0L, record.getOffset(), record.getSize());
                             pk = record.getOffset();
                         } catch (Exception e) {

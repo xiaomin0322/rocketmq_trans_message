@@ -10,5 +10,6 @@ package org.apache.rocketmq.common.message;
  */
 public class PropertyKeyConst {
 
+	//延迟多少秒回调
     public static final String CheckImmunityTimeInSeconds = "__CheckImmunityTimeInSeconds";
 }

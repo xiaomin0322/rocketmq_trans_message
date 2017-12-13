@@ -321,6 +321,7 @@ public class CommitLog {
                 String properties = new String(bytesContent, 0, propertiesLength, MessageDecoder.CHARSET_UTF8);
                 Map<String, String> propertiesMap = MessageDecoder.string2messageProperties(properties);
                 orignQueueOffest = propertiesMap.get(MSG_ORIGION_QUEUE_OFFSET);
+                //延迟多少秒回调时间
                 checkImmunityTimeInSeconds = propertiesMap.get(PropertyKeyConst.CheckImmunityTimeInSeconds);
 
 
@@ -366,16 +367,18 @@ public class CommitLog {
                 return new DispatchRequest(totalSize, false/* success */);
             }
 
-            //回查事务间隔时间
+            //消息指定的回查事务间隔时间
             long checkImmunityTimeOutTimestamp = 0;
             if (checkImmunityTimeInSeconds != null) {
                 try {
+                	//事务回查至少间隔时间
                     checkImmunityTimeOutTimestamp = bornTimeStamp + Long.parseLong(checkImmunityTimeInSeconds.trim()) * 1000L;
                 } catch (Exception e) {
                     log.info("checkImmunityTimeInSeconds format is error:{}", checkImmunityTimeInSeconds);
                     checkImmunityTimeOutTimestamp = 0;
                 }
             } else {
+            	//事务回查至少间隔时间 默认三分钟
                 long checkTransactionMessageAtleastInterval = defaultMessageStore.getMessageStoreConfig()
                         .getCheckTransactionMessageAtleastInterval();
                 checkImmunityTimeOutTimestamp = bornTimeStamp + checkTransactionMessageAtleastInterval;
