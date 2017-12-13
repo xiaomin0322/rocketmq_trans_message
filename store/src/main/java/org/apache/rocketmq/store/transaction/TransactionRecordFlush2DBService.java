@@ -43,7 +43,7 @@ public class TransactionRecordFlush2DBService extends ServiceThread {
          */
         this.transactionOffsetConifgService = new TransactionOffsetConifgService(defaultMessageStore);
         /**
-         * 事物offset维护类
+         * 事物表的配置信息类
          */
         TransactionTableDefConfigService transactionTableDefConfigService = new TransactionTableDefConfigService(defaultMessageStore);
         transactionTableDefConfigService.load();

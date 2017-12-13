@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 
 /**
- * 本地事物offset维护
+ * 本地事物offset维护,定时刷新offset，下次启动便于恢复上次处理的offset
  * @author root
  *
  */

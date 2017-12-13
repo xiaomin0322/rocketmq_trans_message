@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @version V1.0
  * @title: rocketmq-all
  * @Package org.apache.rocketmq.store.transaction
- * @Description:
+ * @Description: 分布式事物文件实现
  * @date 2017/10/25 下午8:37
  */
 public final class TransactionStateFileService implements TransactionStateService {

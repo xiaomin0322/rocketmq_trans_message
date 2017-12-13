@@ -18,6 +18,7 @@ import java.util.UUID;
  */
 
 /**
+ * 事物表的配置信息类(开始启动生产一个hashcode作为表的后缀保存在文件中)
  * 事物 TransactionTableDefConfigService
  * @author root
  *

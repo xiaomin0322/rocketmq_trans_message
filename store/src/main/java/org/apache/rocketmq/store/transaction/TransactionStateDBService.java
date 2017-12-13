@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @version V1.0
  * @title: rocketmq-all
  * @Package org.apache.rocketmq.store.transaction
- * @Description: DB
+ * @Description: 分布式事物db实现
  * @date 2017/11/3 下午4:45
  */
 public class TransactionStateDBService implements TransactionStateService {
