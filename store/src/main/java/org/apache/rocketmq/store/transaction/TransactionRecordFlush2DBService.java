@@ -72,6 +72,7 @@ public class TransactionRecordFlush2DBService extends ServiceThread {
             transactionTableDefConfigService.persist();
         }
 
+        //初始化REQUEST_BUFFER_IN_QUEUE 到 dispatchRequestBufferQueue
         for (int i = 0; i < REQUEST_BUFFER_IN_QUEUE; i++) {
             dispatchRequestBufferQueue.add(new DispatchRequestCollections(new AtomicInteger(0), new ArrayList<DispatchRequest>()));
         }
@@ -120,7 +121,11 @@ public class TransactionRecordFlush2DBService extends ServiceThread {
         }
 
     }
-
+    /**
+     * 消息集合对象 
+     * @author zzm
+     *
+     */
     class DispatchRequestCollections {
         private AtomicInteger latch;
         private List<DispatchRequest> requestlist;
@@ -162,8 +167,10 @@ public class TransactionRecordFlush2DBService extends ServiceThread {
      */
     public void appendPreparedTransaction(DispatchRequest dispatchRequest) {
         try {
+        	//获取令牌，释放在doFlushDB
             flowController.acquire(1);
             while (true) {
+            	//获取第一个对象，并且添加dispatchRequest
                 DispatchRequestCollections requests = dispatchRequestBufferQueue.peek();
                 if (requests.latch.getAndIncrement() >= 0) {
                     requests.requestlist.add(dispatchRequest);
