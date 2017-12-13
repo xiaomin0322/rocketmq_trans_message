@@ -73,7 +73,7 @@ public class TransactionRecordFlush2DBService extends ServiceThread {
         }
 
         for (int i = 0; i < REQUEST_BUFFER_IN_QUEUE; i++) {
-            dispatchRequestBufferQueue.add(new DispatchRequestCollections(new AtomicInteger(0), new ArrayList<>()));
+            dispatchRequestBufferQueue.add(new DispatchRequestCollections(new AtomicInteger(0), new ArrayList<DispatchRequest>()));
         }
     }
 
@@ -148,7 +148,7 @@ public class TransactionRecordFlush2DBService extends ServiceThread {
     private volatile Semaphore flowController = new Semaphore(FLOW_CONTROLLER);
 
     private void putEmptyRequestList() {
-        dispatchRequestBufferQueue.add(new DispatchRequestCollections(new AtomicInteger(0), new CopyOnWriteArrayList<>()));
+        dispatchRequestBufferQueue.add(new DispatchRequestCollections(new AtomicInteger(0), new CopyOnWriteArrayList<DispatchRequest>()));
     }
 
     @Override

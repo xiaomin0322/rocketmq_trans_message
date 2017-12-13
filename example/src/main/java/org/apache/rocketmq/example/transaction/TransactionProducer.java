@@ -16,6 +16,11 @@
  */
 package org.apache.rocketmq.example.transaction;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.client.producer.TransactionCheckListener;
@@ -24,19 +29,13 @@ import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.PropertyKeyConst;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 public class TransactionProducer {
 
     public static Map<Integer, Boolean> statsMap = new ConcurrentHashMap<>();
 
     public static void main(String[] args) throws MQClientException, InterruptedException {
         TransactionCheckListener transactionCheckListener = new TransactionCheckListenerImpl();
-        TransactionMQProducer producer = new TransactionMQProducer("please_rename_unique_group_name");
+        final TransactionMQProducer producer = new TransactionMQProducer("please_rename_unique_group_name");
         producer.setCheckThreadPoolMinSize(2);
         producer.setCheckThreadPoolMaxSize(2);
         producer.setCheckRequestHoldMax(2000);
@@ -46,8 +45,8 @@ public class TransactionProducer {
         producer.start();
 
 
-        String[] tags = new String[]{"TagA", "TagB", "TagC", "TagD", "TagE"};
-        TransactionExecuterImpl tranExecuter = new TransactionExecuterImpl();
+        final String[] tags = new String[]{"TagA", "TagB", "TagC", "TagD", "TagE"};
+        final TransactionExecuterImpl tranExecuter = new TransactionExecuterImpl();
         ExecutorService executorService = Executors.newFixedThreadPool(20);
         for (int j = 0; j < 5000; j++) {
             final int i = j;
