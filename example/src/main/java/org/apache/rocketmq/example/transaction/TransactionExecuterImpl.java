@@ -30,14 +30,14 @@ public class TransactionExecuterImpl implements LocalTransactionExecuter {
     public LocalTransactionState executeLocalTransactionBranch(final Message msg, final Object arg) {
         Integer cnt = (Integer) arg;
         if(cnt%5==0){
-            //return LocalTransactionState.ROLLBACK_MESSAGE;
+           // return LocalTransactionState.ROLLBACK_MESSAGE;
         }
         try {
             Thread.sleep(new Random().nextInt(200));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return LocalTransactionState.COMMIT_MESSAGE;
-       //return LocalTransactionState.UNKNOW;
+        //return LocalTransactionState.COMMIT_MESSAGE;
+      return LocalTransactionState.UNKNOW;
     }
 }

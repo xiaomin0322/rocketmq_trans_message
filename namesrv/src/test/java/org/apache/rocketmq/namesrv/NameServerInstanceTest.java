@@ -36,6 +36,11 @@ public class NameServerInstanceTest {
         assertThat(initResult).isTrue();
         nameSrvController.start();
     }
+    
+    public static void main(String[] args)throws Exception {
+         new NameServerInstanceTest().startup();
+         System.in.read();
+	}
 
     @After
     public void shutdown() throws Exception {

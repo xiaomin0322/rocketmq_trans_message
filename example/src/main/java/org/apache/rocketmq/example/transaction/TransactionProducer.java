@@ -39,8 +39,8 @@ public class TransactionProducer {
         producer.setCheckThreadPoolMinSize(2);
         producer.setCheckThreadPoolMaxSize(2);
         producer.setCheckRequestHoldMax(2000);
-        //producer.setNamesrvAddr("127.0.0.1:9876");
-         producer.setNamesrvAddr("testserver004:9876");
+        producer.setNamesrvAddr("127.0.0.1:9876");
+       // producer.setNamesrvAddr("testserver004:9876");
         producer.setTransactionCheckListener(transactionCheckListener);
         producer.start();
 
@@ -48,7 +48,7 @@ public class TransactionProducer {
         final String[] tags = new String[]{"TagA", "TagB", "TagC", "TagD", "TagE"};
         final TransactionExecuterImpl tranExecuter = new TransactionExecuterImpl();
         ExecutorService executorService = Executors.newFixedThreadPool(20);
-        for (int j = 0; j < 5000; j++) {
+        for (int j = 0; j < 50; j++) {
             final int i = j;
             executorService.submit(new Runnable() {
                 @Override

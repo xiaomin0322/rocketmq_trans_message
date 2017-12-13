@@ -25,8 +25,8 @@ public class TransactionConsumer {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("please_rename_unique_group_name");
         consumer.subscribe("TransactionTest", "*");
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
-        consumer.setNamesrvAddr("testserver004:9876");
-        //consumer.setNamesrvAddr("127.0.0.1:9876");
+        //consumer.setNamesrvAddr("testserver004:9876");
+        consumer.setNamesrvAddr("127.0.0.1:9876");
         consumer.getDefaultMQPushConsumerImpl().registerConsumeMessageHook(new ConsumeMessageHook() {
             @Override
             public String hookName() {

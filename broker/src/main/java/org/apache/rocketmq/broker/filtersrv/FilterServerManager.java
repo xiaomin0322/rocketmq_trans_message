@@ -19,7 +19,7 @@ package org.apache.rocketmq.broker.filtersrv;
 
 import io.netty.channel.Channel;
 import org.apache.rocketmq.broker.BrokerController;
-import org.apache.rocketmq.broker.BrokerStartup;
+import org.apache.rocketmq.broker.BrokerStartupTest;
 import org.apache.rocketmq.common.ThreadFactoryImpl;
 import org.apache.rocketmq.common.constant.LoggerName;
 import org.apache.rocketmq.remoting.common.RemotingUtil;
@@ -75,8 +75,8 @@ public class FilterServerManager {
 
     private String buildStartCommand() {
         String config = "";
-        if (BrokerStartup.configFile != null) {
-            config = String.format("-c %s", BrokerStartup.configFile);
+        if (BrokerStartupTest.configFile != null) {
+            config = String.format("-c %s", BrokerStartupTest.configFile);
         }
 
         if (this.brokerController.getBrokerConfig().getNamesrvAddr() != null) {
