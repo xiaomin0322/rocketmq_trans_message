@@ -31,20 +31,25 @@ public class Consumer {
 
     public static void main(String[] args) throws MQClientException {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("please_rename_unique_group_name_3");
+        consumer.setNamesrvAddr("127.0.0.1:9876");
+        //consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
+        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
+        
+        
+        //consumer.subscribe("TopicTestOderyly", "TagA || TagC || TagD");
 
-        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
+        consumer.subscribe("TopicTestOderyly2", "*");
 
-        consumer.subscribe("TopicTest", "TagA || TagC || TagD");
-
+        
         consumer.registerMessageListener(new MessageListenerOrderly() {
             AtomicLong consumeTimes = new AtomicLong(0);
 
             @Override
             public ConsumeOrderlyStatus consumeMessage(List<MessageExt> msgs, ConsumeOrderlyContext context) {
                 context.setAutoCommit(false);
-                System.out.printf(Thread.currentThread().getName() + " Receive New Messages: " + msgs + "%n");
+                System.out.printf(Thread.currentThread().getName() + " Receive New Messages: "  + new String("QueueId="+msgs.get(0).getQueueId() + " body :"+new String(msgs.get(0).getBody())) + "%n");
                 this.consumeTimes.incrementAndGet();
-                if ((this.consumeTimes.get() % 2) == 0) {
+             /*   if ((this.consumeTimes.get() % 2) == 0) {
                     return ConsumeOrderlyStatus.SUCCESS;
                 } else if ((this.consumeTimes.get() % 3) == 0) {
                     return ConsumeOrderlyStatus.ROLLBACK;
@@ -53,7 +58,7 @@ public class Consumer {
                 } else if ((this.consumeTimes.get() % 5) == 0) {
                     context.setSuspendCurrentQueueTimeMillis(3000);
                     return ConsumeOrderlyStatus.SUSPEND_CURRENT_QUEUE_A_MOMENT;
-                }
+                }*/
 
                 return ConsumeOrderlyStatus.SUCCESS;
             }

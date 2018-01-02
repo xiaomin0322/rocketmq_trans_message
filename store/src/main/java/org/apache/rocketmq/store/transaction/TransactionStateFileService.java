@@ -188,11 +188,17 @@ public final class TransactionStateFileService implements TransactionStateServic
     }
 
 
+    /**
+     * 停止定时器
+     */
     public void shutdown() {
         this.timer.cancel();
     }
 
 
+    /**
+     * 删除过期的事物存储文件
+     */
     public int deleteExpiredStateFile(long offset) {
         int cnt = this.tranStateTable.deleteExpiredFileByOffset(offset, TSS_STORE_UNIT_SIZE);
         return cnt;

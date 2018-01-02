@@ -44,7 +44,7 @@ public class BrokerStartupTest {
 	   
 	   System.setProperty("ROCKETMQ_HOME", "G:\\software\\apache-rocketmq-all");
 
-	   args = new String[] {"-n","127.0.0.1:9876","-c","E:\\eclipse-workspace\\rocketmq_trans_message\\conf\\broker.conf"};
+	   args = new String[] {"-n","127.0.0.1:9876","autoCreateTopicEnable=true","-c","G:\\software\\apache-rocketmq-all\\conf\\broker.conf"};
 	   BrokerStartup.main(args);
 	   System.in.read();
 }
